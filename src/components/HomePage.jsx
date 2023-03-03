@@ -34,7 +34,7 @@ const HomePage = () => {
     useEffect(() => {
         getPokemonAPIData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [page]);
 
     console.log("pokeAPIData", pokemonData);
     // console.log("pokemonData", pokemonData)
