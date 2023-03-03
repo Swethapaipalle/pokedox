@@ -9,10 +9,15 @@
   text-align: center;
   display:flex;
   justify-content:center;
-  margin-top: 2%;
-  margin-bottom: 4%;
+  margin-top: 1%;
+  margin-bottom: 2%;
 }
 
 .CardView {
+  display:flex;
   justify-content:center;
+  height: 81% !important;
+}
+.Card {
+  margin: 15px 20px !important;
 }
