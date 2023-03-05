@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Pagination from "@mui/material/Pagination";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import IconButton from "@mui/material/IconButton";
+import {
+  Grid,
+  Box,
+  Card,
+  IconButton,
+  Typography,
+  Pagination,
+  Chip,
+  Stack,
+} from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
-import Typography from "@mui/material/Typography";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
-import "./../App.css";
+import './../App.css';
 
 const HomePage = () => {
   const [pokemonData, setPokemonData] = useState([]);
   const [page, setPage] = useState(1);
+  const [starInfo, setStarInfo] = useState([]);
 
   const getPokemonAPIData = async () => {
     let result = await axios
@@ -26,21 +29,44 @@ const HomePage = () => {
       setPokemonData(responses);
     });
   };
+  useEffect(() => {
+    let getStarInfo = JSON.parse(localStorage.getItem("starInfo"));
+    if (getStarInfo) {
+      let fetchedData = getStarInfo;
+      setStarInfo(fetchedData);
+    }
+    return () => {
+      // window.localStorage.clear();
+    };
+  }, []);
+  
+  useEffect(() => {
+    getPokemonAPIData();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
 
   const handlePage = (e, value) => {
     setPage(value);
   };
 
-  useEffect(() => {
-    getPokemonAPIData();
-  }, [page]);
-
+  const handleStateClick = (id) => {
+    let newStarInfo = Object.assign([], starInfo);
+    if (newStarInfo.includes(id)) {
+      let index = newStarInfo.indexOf(id);
+      newStarInfo.splice(index, 1);
+    } else {
+      newStarInfo.push(id);
+    }
+    setStarInfo(newStarInfo);
+    window.localStorage.setItem("starInfo", JSON.stringify(newStarInfo));
+  };
   return (
     <div>
       <Typography
         variant="h4"
         component="h4"
-        marginTop={1}
+        marginTop={2}
         fontFamily={'"Segoe UI"'}
         fontWeight="bold"
       >
@@ -48,18 +74,18 @@ const HomePage = () => {
       </Typography>
       <div className="CardView">
         <Grid container direction="row" justifyContent={"center"}>
-          {pokemonData.map((item, index) => {
+          {pokemonData.map((item) => {
+            let isItemStarEnabled = starInfo?.includes(item.id);
             return (
               <Grid
-                key={item.id}
                 item
+                key={item.id}
                 sm={4}
                 md={2}
                 margin={4}
                 minHeight={250}
                 minWidth={250}
-                className="Card"
-              >
+                className="Card"              >
                 <Card>
                   <Box
                     display="flex"
@@ -67,8 +93,14 @@ const HomePage = () => {
                     alignItems="flex-end"
                     margin={0.5}
                   >
-                    <IconButton aria-label="add to favorites" size="small">
-                      <StarIcon />
+                    <IconButton
+                      aria-label="add to favorites"
+                      size="small"
+                      onClick={() => handleStateClick(item.id)}
+                    >
+                      <StarIcon
+                        style={{ color: isItemStarEnabled ? "gold" : "black" }}
+                      />
                     </IconButton>
                   </Box>
                   <Box justifyContent="center" alignItems="center">
@@ -95,6 +127,7 @@ const HomePage = () => {
                     {item.types.map((item, index) => {
                       return (
                         <Chip
+                          key={item.slot}
                           label={item.type.name}
                           color="primary"
                           style={{
