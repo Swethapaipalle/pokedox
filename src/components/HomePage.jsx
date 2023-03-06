@@ -39,10 +39,10 @@ const HomePage = () => {
       // window.localStorage.clear();
     };
   }, []);
-  
+
   useEffect(() => {
     getPokemonAPIData();
-      // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
 
@@ -66,7 +66,7 @@ const HomePage = () => {
       <Typography
         variant="h4"
         component="h4"
-        marginTop={2}
+        marginTop={1}
         fontFamily={'"Segoe UI"'}
         fontWeight="bold"
       >
@@ -85,8 +85,8 @@ const HomePage = () => {
                 margin={4}
                 minHeight={250}
                 minWidth={250}
-                className="Card"              >
-                <Card>
+                className="CardList"              >
+                <Card className="Card">
                   <Box
                     display="flex"
                     justifyContent="flex-end"
@@ -113,8 +113,8 @@ const HomePage = () => {
                     </Typography>
                   </Box>
                   <img
-                    height={124}
-                    width={96}
+                    height={110}
+                    width={90}
                     src={item.sprites.front_default}
                     alt={item.name}
                   />
@@ -133,6 +133,7 @@ const HomePage = () => {
                           style={{
                             backgroundColor:
                               `#${Math.random().toString(16).substr(-6)}`,
+                              marginBottom:"20px",
                           }}
                         />
                       );
