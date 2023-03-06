@@ -4,15 +4,6 @@
   justify-content:center;
   background-color: #ebebe0;
 }
-
-.Pagination {
-  text-align: center;
-  display:flex;
-  justify-content:center;
-  margin-top: 1%;
-  margin-bottom: 0%;
-}
-
 .CardView {
   display:flex;
   justify-content:center;
@@ -24,4 +15,22 @@
 .Card {
   width: 90%!important;
   height:90%;
+}
+.Pagination {
+  text-align: center;
+  display:flex;
+  justify-content:center;
+  margin-top: 1%;
+  margin-bottom: 2%;
+}
+
+@media screen and  (max-width: 900px) and (min-width: 300px) {
+  .Pagination {
+    margin-top:230px;
+   }
+}
+@media screen and  (max-width: 1200px) and (min-width: 820px) {
+  .Pagination {
+    margin-top:80px;
+   }
 }
