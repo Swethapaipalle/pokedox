@@ -10,7 +10,7 @@
   display:flex;
   justify-content:center;
   margin-top: 1%;
-  margin-bottom: 1%;
+  margin-bottom: 0%;
 }
 
 .CardView {
@@ -19,7 +19,7 @@
   height: 81% !important;
 }
 .CardList {
-  margin: 20px 20px !important;
+  margin: 30px !important;
 }
 .Card {
   width: 90%!important;

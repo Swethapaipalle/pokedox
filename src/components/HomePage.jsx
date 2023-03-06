@@ -113,7 +113,7 @@ const HomePage = () => {
                     </Typography>
                   </Box>
                   <img
-                    height={110}
+                    height={100}
                     width={90}
                     src={item.sprites.front_default}
                     alt={item.name}
@@ -133,7 +133,7 @@ const HomePage = () => {
                           style={{
                             backgroundColor:
                               `#${Math.random().toString(16).substr(-6)}`,
-                              marginBottom:"20px",
+                              marginBottom:"35px",
                           }}
                         />
                       );
